@@ -1,4 +1,4 @@
-streamlit==1.15.2
-skimage==0.17.2
-opencv-python==4.0.1
-numpy==1.23.4
+streamlit
+skimage
+opencv-python
+numpy
