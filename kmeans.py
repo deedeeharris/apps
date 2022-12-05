@@ -55,7 +55,7 @@ def segment_image_kmeans(img, k=3, attempts=10):
 DEMO_IMAGE = 'demo.png' # a demo image for the segmentation page, if none is uploaded
 
 # main page
-st.title('Image Segmentation using K-Means')
+st.title('Image Segmentation using K-Means, by Yedidya Harris')
 
 # side bar
 st.markdown(
@@ -78,7 +78,7 @@ st.markdown(
 )
 
 st.sidebar.title('Segmentation Sidebar')
-st.sidebar.subheader('parameters')
+st.sidebar.subheader('Site Pages')
 
 
 # In[19]:
@@ -152,7 +152,7 @@ if app_mode == 'About App':
                 ## About the app \n
                 Hey, this web app is a great one to segment images using K-Means. \n
                 There are many way. \n
-                Enjoy!
+                Enjoy! Yedidya
 
 
                 ''') 
