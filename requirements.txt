@@ -1,4 +1,4 @@
 streamlit
-skimage
+scikit-image
 opencv-python
 numpy
