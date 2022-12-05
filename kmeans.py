@@ -213,32 +213,4 @@ if app_mode == 'Segment an Image':
     st.subheader('Output Image')
     st.image(segmented_image, use_column_width=True)
  
-    
-
-
-# In[35]:
-
-
-
-# read an image of pebbles
-img = io.imread('sand.jpg', as_gray = False)
-segmented_image = segment_image_kmeans(img, k=4, attempts=10)    
-
-
-# In[36]:
-
-
-plt.imshow(segmented_image)
-
-
-# In[44]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+   
