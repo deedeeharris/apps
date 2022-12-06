@@ -84,7 +84,7 @@ DEMO_IMAGE = 'demo.png' # a demo image for the segmentation page, if none is upl
 favicon = 'favicon.png'
 
 # main page
-st.set_page_config(page_title='K-Means - Yedidya Harris', page_icon = favicon, layout = 'wide', initial_sidebar_state = 'auto')
+#st.set_page_config(page_title='K-Means - Yedidya Harris', page_icon = favicon, layout = 'wide', initial_sidebar_state = 'auto')
 set_page_title("K-Means - Yedidya Harris")
 st.title('Image Segmentation using K-Means, by Yedidya Harris')
 
