@@ -47,35 +47,6 @@ def segment_image_kmeans(img, k=3, attempts=10):
     
     return segmented_image
 
-# function to change page title
-def set_page_title(title):
-    st.sidebar.markdown(unsafe_allow_html=True, body=f"""
-        <iframe height=0 srcdoc="<script>
-            const title = window.parent.document.querySelector('title') \
-                
-            const oldObserver = window.parent.titleObserver
-            if (oldObserver) {{
-                oldObserver.disconnect()
-            }} \
-
-            const newObserver = new MutationObserver(function(mutations) {{
-                const target = mutations[0].target
-                if (target.text !== '{title}') {{
-                    target.text = '{title}'
-                }}
-            }}) \
-
-            newObserver.observe(title, {{ childList: true }})
-            window.parent.titleObserver = newObserver \
-
-            title.text = '{title}'
-        </script>" />
-    """)
-
-
-
-
-
 # In[18]:
 
 
@@ -84,8 +55,7 @@ DEMO_IMAGE = 'demo.png' # a demo image for the segmentation page, if none is upl
 favicon = 'favicon.png'
 
 # main page
-#st.set_page_config(page_title='K-Means - Yedidya Harris', page_icon = favicon, layout = 'wide', initial_sidebar_state = 'auto')
-set_page_title("K-Means - Yedidya Harris")
+st.set_page_config(page_title='K-Means - Yedidya Harris', page_icon = favicon, layout = 'wide', initial_sidebar_state = 'auto')
 st.title('Image Segmentation using K-Means, by Yedidya Harris')
 
 # side bar
