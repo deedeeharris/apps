@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding: utf-8
 
-# Create your first 'real' web-app, with streamlit (only Python!)
+# In[ ]:
 
-#Yedidya Harris
 
-## importing libs and creatingn functions
 
 
 # import libs
@@ -16,6 +15,12 @@ import skimage.io as io
 
 # check versions
 #np.__version__
+
+
+# In[ ]:
+
+
+
 
 # function to segment using k-means
 
@@ -46,7 +51,11 @@ def segment_image_kmeans(img, k=3, attempts=10):
     
     return segmented_image
 
-## vars, main page, and sidebar
+
+# In[ ]:
+
+
+
 
 # vars
 DEMO_IMAGE = 'demo.png' # a demo image for the segmentation page, if none is uploaded
@@ -79,6 +88,11 @@ st.markdown(
 st.sidebar.title('Segmentation Sidebar')
 st.sidebar.subheader('Site Pages')
 
+
+# In[ ]:
+
+
+
 # using st.cache so streamlit runs the following function only once, and stores in chache (until changed)
 @st.cache()
 
@@ -103,13 +117,19 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
     
     return resized
 
-## dropdown menu on the sidebar, to navigate between pages
+
+# In[ ]:
+
 
 # add dropdown to select pages on left
 app_mode = st.sidebar.selectbox('Choose the App mode',
                                   ['About App', 'Segment an Image'])
 
-## About page
+
+# In[ ]:
+
+
+
 
 # About page
 if app_mode == 'About App':
@@ -147,9 +167,13 @@ if app_mode == 'About App':
                 Enjoy! Yedidya
 
 
-                ''')
+                ''') 
 
-## 'Segment an Image' page
+
+# In[ ]:
+
+
+
 
 # Run image
 if app_mode == 'Segment an Image':
@@ -203,3 +227,4 @@ if app_mode == 'Segment an Image':
     # Display the result on the right (main frame)
     st.subheader('Output Image')
     st.image(segmented_image, use_column_width=True)
+
