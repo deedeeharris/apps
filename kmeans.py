@@ -46,7 +46,7 @@ def segment_image_kmeans(img, k=3, attempts=10):
     
     return segmented_image
 
-"""## vars, main page, and sidebar"""
+## vars, main page, and sidebar
 
 # vars
 DEMO_IMAGE = 'demo.png' # a demo image for the segmentation page, if none is uploaded
@@ -103,13 +103,13 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
     
     return resized
 
-"""## dropdown menu on the sidebar, to navigate between pages"""
+## dropdown menu on the sidebar, to navigate between pages
 
 # add dropdown to select pages on left
 app_mode = st.sidebar.selectbox('Choose the App mode',
                                   ['About App', 'Segment an Image'])
 
-"""## About page"""
+## About page
 
 # About page
 if app_mode == 'About App':
@@ -149,7 +149,7 @@ if app_mode == 'About App':
 
                 ''')
 
-"""## 'Segment an Image' page"""
+## 'Segment an Image' page
 
 # Run image
 if app_mode == 'Segment an Image':
