@@ -4,8 +4,6 @@
 # In[ ]:
 
 
-
-
 # import libs
 import streamlit as st
 import cv2
@@ -18,8 +16,6 @@ import skimage.io as io
 
 
 # In[ ]:
-
-
 
 
 # function to segment using k-means
@@ -53,8 +49,6 @@ def segment_image_kmeans(img, k=3, attempts=10):
 
 
 # In[ ]:
-
-
 
 
 # vars
@@ -92,7 +86,6 @@ st.sidebar.subheader('Site Pages')
 # In[ ]:
 
 
-
 # using st.cache so streamlit runs the following function only once, and stores in chache (until changed)
 @st.cache()
 
@@ -122,13 +115,11 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
 
 
 # add dropdown to select pages on left
-app_mode = st.sidebar.selectbox('Choose the App mode',
+app_mode = st.sidebar.selectbox('Navigate',
                                   ['About App', 'Segment an Image'])
 
 
 # In[ ]:
-
-
 
 
 # About page
@@ -171,8 +162,6 @@ if app_mode == 'About App':
 
 
 # In[ ]:
-
-
 
 
 # Run image
