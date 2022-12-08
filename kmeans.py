@@ -220,7 +220,6 @@ if app_mode == 'Segment an Image':
     btn = st.download_button(
         label="Download image",
         data=segmented_image,
-        file_name="segmented_image.jpg",
-        mime="image/jpg"
+        file_name="segmented_image.png",
+        mime="image/png"
       )
-
