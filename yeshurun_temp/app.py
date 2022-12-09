@@ -24,7 +24,7 @@ def find_green(img):
 DEMO_IMAGE = 'leafs.jpeg' # a demo image for the segmentation page, if none is uploaded
 
 # main page
-st.set_page_config(page_title='green segment', page_icon = favicon, layout = 'wide', initial_sidebar_state = 'auto')
+st.set_page_config(page_title='green segment', layout = 'wide', initial_sidebar_state = 'auto')
 st.title('Image Segmentation using K-Means, by Yedidya Harris')
 
 # side bar
