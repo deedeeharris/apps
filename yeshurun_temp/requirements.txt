@@ -1,0 +1,6 @@
+streamlit
+scikit-image
+numpy
+matplotlib
+opencv-contrib-python-headless
+scipy
