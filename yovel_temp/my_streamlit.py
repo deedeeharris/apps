@@ -128,9 +128,9 @@ st.sidebar.image(image)
 # call the function to segment the image
 segmented_image = otsu_segment(image, sigma=sigma_value)
 
-# save the img to disk
-io.imsave(segmented_image, 'image.jpg')
 
+# test the output image
+st.text(type(segmented_image))
 # Display the result on the right (main frame)
 st.subheader('Output Image')
 #st.image(segmented_image)
