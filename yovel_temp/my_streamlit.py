@@ -129,9 +129,6 @@ st.sidebar.image(image)
 segmented_image = otsu_segment(image, sigma=sigma_value)
 
 
-# test the output image
-st.text(type(segmented_image))
-st.text(segmented_image)
 # Display the result on the right (main frame)
 st.subheader('Output Image')
 st.image(segmented_image)
