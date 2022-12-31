@@ -13,8 +13,8 @@ if uploaded_file is not None:
     
     st.image(image, caption="Original image", use_column_width=True)
     
-    filters = ["Sharpen", "Canny edge detection", "Median filter", "Blur", "Contour"]
-    filter_choice = st.selectbox("Choose a filter", filters)
+    filters_list = ["Sharpen", "Canny edge detection", "Median filter", "Blur", "Contour"]
+    filter_choice = st.selectbox("Choose a filter", filters_list)
     
     # Sharpen filter has no adjustable parameters
     if filter_choice == "Sharpen":
