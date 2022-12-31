@@ -37,7 +37,7 @@ def main():
     image_path = st.file_uploader("Choose an image", type=["jpg", "png"])
     if not image_path:
         # Load default image and segment using k-means
-        image_url = "https://gardenerspath.com/wp-content/uploads/2020/09/Common-Tomato-Diseases-Cover.jpg"
+        image_url = "https://www.sciencemag.org/sites/default/files/styles/article_main_image/public/images/sn-image_2958.jpg"
         image = load_image(image_url)
         k = st.sidebar.slider("Number of clusters", 2, 10, 5)
         labels, centers = compute_kmeans(image, k)
@@ -46,4 +46,12 @@ def main():
     else:
         # Load and segment user-uploaded image
         image = load_image(image_path)
-        k = st.sidebar.slider("Number of clusters", 2, 10,
+        k = st.sidebar.slider("Number of clusters", 2, 10, 5)
+        labels, centers = compute_kmeans(image, k)
+        mask = create_mask(image, labels, centers)
+        st.image(image_path, width=400)
+    
+    # Display mask image
+    plt.imshow(mask, cmap="Accent")
+    st.pyplot()
+
