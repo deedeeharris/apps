@@ -1,5 +1,0 @@
-streamlit
-scikit-image
-opencv-contrib-python-headless
-numpy
-imutils
