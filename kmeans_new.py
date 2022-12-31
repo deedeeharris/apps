@@ -82,11 +82,6 @@ def select_object(mask, image):
     # Display the labeled mask in the Streamlit app
     st.image(colored_mask_image, use_column_width=True)
     
-    # Get the mouse position when the user clicks on the image
-    x, y = st.markdown("Please click on the labeled mask to select an object").get_click()
-    
-    # Get the label of the selected object
-    label = mask[y, x]
     
  # Create a button that the user can click to select an object
     if st.button("Select object"):
