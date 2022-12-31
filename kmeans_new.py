@@ -1,115 +1,72 @@
 import streamlit as st
-import cv2
+import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cluster import KMeans
+from skimage import io
+from skimage.color import rgb2lab, deltaE_cie76
 
-# Function to segment the image using K-Means clustering
-def segment_image(image, n_clusters):
-    # Convert the image to a 2D array of pixels
-    pixels = image.reshape((image.shape[0] * image.shape[1], 3))
+# Load image and convert to Lab color space
+def load_image(image_path):
+    image = io.imread(image_path)
+    image = rgb2lab(image)
+    return image
 
-    # Apply K-Means clustering to the pixels
-    kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(pixels)
+# Compute distance between two color vectors
+def compute_distance(color_1, color_2):
+    return deltaE_cie76(color_1, color_2)
 
-    # Create a labeled mask by assigning each pixel to its cluster
-    labels = kmeans.labels_.reshape(image.shape[:2])
+# Compute k-means clustering
+def compute_kmeans(image, k):
+    # Extract color vectors
+    image = image.reshape(image.shape[0] * image.shape[1], 3)
     
-    return labels
+    # Initialize k-means model and fit to data
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(image)
+    
+    # Extract labels and cluster centers
+    labels = kmeans.predict(image)
+    centers = kmeans.cluster_centers_
+    
+    return labels, centers
 
-# Function to create a colored mask from a labeled mask
-def create_mask(labels):
-    # Create a mask image with the same dimensions as the input image
-    mask = np.zeros_like(labels, dtype=np.uint8)
-
-    # Assign a different color to each cluster using the color map
-    for i in range(256):
-        mask[labels == i] = i
+# Create mask image
+def create_mask(image, labels, centers):
+    mask = np.zeros(image.shape[:2])
+    for i in range(mask.shape[0]):
+        for j in range(mask.shape[1]):
+            mask[i, j] = np.argmin([compute_distance(image[i, j, :], centers[k]) for k in range(centers.shape[0])])
     
     return mask
 
-
-
-# Function to segment a specific object in the image based on the selected mask
-def display_segmented_object(mask, image):
-    # Check if the mask is a 2D or 3D array
-    if mask.ndim == 2:
-        # Create a new image from the 2D mask array
-        mask_image = cv2.merge((mask, mask, mask))
-    elif mask.ndim == 3:
-        # Create a new image from the 3D mask array
-        mask_image = cv2.merge((mask[:,:,0], mask[:,:,1], mask[:,:,2]))
-    else:
-        # Raise an error if the mask is not a 2D or 3D array
-        raise ValueError("Invalid mask array")
-    
-    # Convert the colored mask to grayscale
-    gray = cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY)
-    
-    # Threshold the mask to create a binary image
-    _, threshold = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)
-    
-    # Bitwise-and the image with the mask to extract the object
-    object = cv2.bitwise_and(image, image, mask=threshold)
-    
-    # Display a "Please wait" message
-    st.markdown("Please wait...")
-    
-    # Display the segmented object using Streamlit
-    st.image(object)
-    
-    # Clear the "Please wait" message
-    st.markdown("")
-
-
-def select_object(mask, image):
-    blank_image = np.zeros_like(image)
-    labels = np.unique(mask)
-    #color_map = np.random.randint(0, 256, (len(labels), 3), dtype=np.uint8)
-    colored_mask = np.zeros_like(mask)
-    for i in labels:
-        colored_mask[mask == i] = i
-    colored_mask_image = cv2.cvtColor(colored_mask, cv2.COLOR_GRAY2BGR)
-    click_data = st.image(colored_mask_image, use_column_width=True)
-    if not isinstance(click_data, dict):
-        return
-    try:
-        x, y = click_data["points"][0]
-    except (KeyError, IndexError):
-        # Handle the exception here
-        return
-    label = mask[y, x]
-    object = cv2.bitwise_and(image, image, mask=mask == label)
-    st.image(object, use_column_width=True)
-
-
-
-
-
-
-# Main function
+# App
 def main():
-    # Allow the user to upload an image
-    image = st.file_uploader("Upload an image", type="jpg")
+    # Upload image
+    image_path = st.file_uploader("Choose an image", type=["jpg", "png"])
+    if not image_path:
+        return
+    image = load_image(image_path)
     
-    # Check if an image was uploaded
-    if image is not None:
-        # Convert the image to a NumPy array
-        image = np.frombuffer(image.read(), np.uint8)
-        
-        # Decode the image
-        image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        
-        # Segment the image using K-Means
-        labels = segment_image(image, n_clusters=5)
-        
-        # Create a colored mask from the labeled mask
-        mask = create_mask(labels)
-        
-        # Display the labeled mask
-        st.image(mask)
-        
-        display_segmented_object(mask, image)
-        
-        select_object(mask, image)
+    # Select number of clusters
+    k = st.sidebar.slider("Number of clusters", 2, 10, 5)
+    
+    # Compute k-means clustering
+    labels, centers = compute_kmeans(image, k)
+    
+    # Create mask image
+    mask = create_mask(image, labels, centers)
+    
+    # Display original image
+    st.image(image_path, width=400)
+    
+    # Display mask image
+    plt.imshow(mask, cmap="Accent")
+    st.pyplot()
+    
+    # Download mask image
+    if st.button("Download mask"):
+        plt.imsave("mask.jpg", mask, cmap="Accent")
+        st.markdown("<a href='mask.jpg' download>Download mask</a>", unsafe_allow_html=True)
 
-main()
+if __name__ == "__main__":
+    main()
