@@ -5,6 +5,9 @@ from sklearn.cluster import KMeans
 from skimage import io
 from skimage.color import rgb2lab, deltaE_cie76
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
+
 # Load image and convert to Lab color space
 def load_image(image_path):
     image = io.imread(image_path)
