@@ -44,13 +44,6 @@ def main():
     st.image(image_path, width=400)
     plt.imshow(mask, cmap="Accent")
     st.pyplot()
-    if st.button("Download mask"):
-        with st.echo():
-            buf = io.BytesIO()
-            plt.imsave(buf, mask, cmap="Accent")
-            buf.seek(0)
-            st.markdown("<a href='#' download='mask.jpg'>Download mask</a>", unsafe_allow_html=True)
-            st.write(buf.getvalue(), "image/jpeg", "mask.jpg")
 
 if __name__ == "__main__":
     main()
