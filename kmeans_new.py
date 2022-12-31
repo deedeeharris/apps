@@ -88,11 +88,19 @@ def select_object(mask, image):
     # Get the label of the selected object
     label = mask[y, x]
     
-    # Extract the object from the original image using the mask
-    object = cv2.bitwise_and(image, image, mask=colored_mask == label)
-    
-    # Display the selected object in the Streamlit app
-    st.image(object, use_column_width=True)
+ # Create a button that the user can click to select an object
+    if st.button("Select object"):
+        # Get the mouse position when the user clicks on the image
+        x, y = st.get_cursor_position()
+        
+        # Get the label of the selected object
+        label = mask[y, x]
+        
+        # Extract the object from the original image using the mask
+        object = cv2.bitwise_and(image, image, mask=mask == label)
+        
+        # Display the selected object in the Streamlit app
+        st.image(object, use_column_width=True)
 
 
 
