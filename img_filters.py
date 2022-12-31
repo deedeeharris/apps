@@ -9,7 +9,7 @@ uploaded_file = st.file_uploader("Choose an image file", type="jpg")
 
 if uploaded_file is not None:
     # Load the image using OpenCV
-    image = cv2.imread(uploaded_file)
+    image = cv2.imread(uploaded_file.name)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
     st.image(image, caption="Original image", use_column_width=True)
