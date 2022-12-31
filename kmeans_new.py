@@ -70,15 +70,16 @@ def select_object(mask, image):
         colored_mask[mask == i] = i
     colored_mask_image = cv2.cvtColor(colored_mask, cv2.COLOR_GRAY2BGR)
     click_data = st.image(colored_mask_image, use_column_width=True)
-    if click_data is not None:
-        try:
-            x, y = click_data["points"][0]
-        except (KeyError, IndexError):
-            # Handle the exception here
-            return
-        label = mask[y, x]
-        object = cv2.bitwise_and(image, image, mask=mask == label)
-        st.image(object, use_column_width=True)
+    if not isinstance(click_data, dict):
+        return
+    try:
+        x, y = click_data["points"][0]
+    except (KeyError, IndexError):
+        # Handle the exception here
+        return
+    label = mask[y, x]
+    object = cv2.bitwise_and(image, image, mask=mask == label)
+    st.image(object, use_column_width=True)
 
 
 
