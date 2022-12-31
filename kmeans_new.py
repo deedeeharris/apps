@@ -21,11 +21,6 @@ def create_mask(labels):
     # Create a mask image with the same dimensions as the input image
     mask = np.zeros_like(labels, dtype=np.uint8)
 
-    # Create an image with a single channel from the array of integers
-    image = cv2.merge((np.arange(256),))
-
-
-
     # Assign a different color to each cluster using the color map
     for i in range(256):
         mask[labels == i] = i
