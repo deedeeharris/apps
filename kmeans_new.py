@@ -79,22 +79,11 @@ def select_object(mask, image):
     # Convert the colored mask to a 3-channel image
     colored_mask_image = cv2.cvtColor(colored_mask, cv2.COLOR_GRAY2BGR)
     
-    # Display the labeled mask in the Streamlit app
-    st.image(colored_mask_image, use_column_width=True)
-    
-    
- # Create a button that the user can click to select an object
-    if st.button("Select object"):
-        # Get the mouse position when the user clicks on the image
-        x, y = st.get_cursor_position()
-        
-        # Get the label of the selected object
+    click_data = st.image(colored_mask_image, use_column_width=True)
+    if click_data is not None:
+        x, y = click_data["points"][0]
         label = mask[y, x]
-        
-        # Extract the object from the original image using the mask
         object = cv2.bitwise_and(image, image, mask=mask == label)
-        
-        # Display the selected object in the Streamlit app
         st.image(object, use_column_width=True)
 
 
