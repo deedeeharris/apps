@@ -60,9 +60,6 @@ def display_segmented_object(mask, image):
     # Clear the "Please wait" message
     st.markdown("")
 
-import streamlit as st
-import cv2
-import numpy as np
 
 def select_object(mask, image):
     # Create a blank image with the same shape as the original image
@@ -71,15 +68,13 @@ def select_object(mask, image):
     # Get the unique labels in the mask
     labels = np.unique(mask)
     
-    # Create a color map for the labels
-    color_map = np.random.randint(0, 256, (len(labels), 3), dtype=np.uint8)
     
     # Create a blank image with the same shape as the mask
     colored_mask = np.zeros_like(mask)
     
     # Color each label in the mask with a different color
     for i in labels:
-        colored_mask[mask == i] = color_map[i]
+        colored_mask[mask == i] = i
     
     # Convert the colored mask to a 3-channel image
     colored_mask_image = cv2.cvtColor(colored_mask, cv2.COLOR_GRAY2BGR)
@@ -91,7 +86,7 @@ def select_object(mask, image):
     x, y = st.markdown("Please click on the labeled mask to select an object").get_click()
     
     # Get the label of the selected object
-    label = colored_mask[y, x]
+    label = mask[y, x]
     
     # Extract the object from the original image using the mask
     object = cv2.bitwise_and(image, image, mask=colored_mask == label)
