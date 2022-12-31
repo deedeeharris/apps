@@ -21,14 +21,15 @@ def create_mask(labels):
     # Create a mask image with the same dimensions as the input image
     mask = np.zeros_like(labels, dtype=np.uint8)
 
-    # Create a color map with 256 colors
-    color_map = cv2.COLORMAP_JET
+    # Use the JET color map provided by OpenCV
+    color_map = cv2.applyColorMap(np.arange(256).reshape(1,256,1), cv2.COLORMAP_JET)
 
     # Assign a different color to each cluster using the color map
     for i in range(256):
-        mask[labels == i] = color_map[i]
+        mask[labels == i] = color_map[:,:,0][i]
     
     return mask
+
 
 # Function to segment a specific object in the image based on the selected mask
 def display_segmented_object(mask, image):
