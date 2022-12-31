@@ -9,7 +9,7 @@ uploaded_file = st.file_uploader("Choose an image file", type="jpg")
 
 if uploaded_file is not None:
     # Load the image using scikit-image
-    image = uploaded_file
+    image = color.rgb2gray(color.from_rgb_image(uploaded_file))
     
     st.image(image, caption="Original image", use_column_width=True)
     
