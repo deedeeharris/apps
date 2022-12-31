@@ -37,7 +37,7 @@ def main():
     image_path = st.file_uploader("Choose an image", type=["jpg", "png"])
     if not image_path:
         # Load default image and segment using k-means
-        image_url = "https://www.sciencemag.org/sites/default/files/styles/article_main_image/public/images/sn-image_2958.jpg"
+        image_url = "https://cdn.shopify.com/s/files/1/0257/4565/3811/articles/BONNIE_tomatoes_iStock-481349128-1800px_9f8f5390-a418-4d91-a3d0-00ae0b7900cb.jpg"
         image = load_image(image_url)
         k = st.sidebar.slider("Number of clusters", 2, 10, 5)
         labels, centers = compute_kmeans(image, k)
