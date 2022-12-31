@@ -62,29 +62,24 @@ def display_segmented_object(mask, image):
 
 
 def select_object(mask, image):
-    # Create a blank image with the same shape as the original image
     blank_image = np.zeros_like(image)
-    
-    # Get the unique labels in the mask
     labels = np.unique(mask)
-    
-    
-    # Create a blank image with the same shape as the mask
+    #color_map = np.random.randint(0, 256, (len(labels), 3), dtype=np.uint8)
     colored_mask = np.zeros_like(mask)
-    
-    # Color each label in the mask with a different color
     for i in labels:
         colored_mask[mask == i] = i
-    
-    # Convert the colored mask to a 3-channel image
     colored_mask_image = cv2.cvtColor(colored_mask, cv2.COLOR_GRAY2BGR)
-    
     click_data = st.image(colored_mask_image, use_column_width=True)
     if click_data is not None:
-        x, y = click_data["points"][0]
+        try:
+            x, y = click_data["points"][0]
+        except (KeyError, IndexError):
+            # Handle the exception here
+            return
         label = mask[y, x]
         object = cv2.bitwise_and(image, image, mask=mask == label)
         st.image(object, use_column_width=True)
+
 
 
 
