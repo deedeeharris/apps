@@ -24,12 +24,11 @@ def create_mask(labels):
     # Create an image with a single channel from the array of integers
     image = cv2.merge((np.arange(256),))
 
-    # Use the JET color map provided by OpenCV
-    color_map = cv2.applyColorMap(image, cv2.COLORMAP_JET)
+
 
     # Assign a different color to each cluster using the color map
     for i in range(256):
-        mask[labels == i] = color_map[:,:,0][i]
+        mask[labels == i] = i
     
     return mask
 
