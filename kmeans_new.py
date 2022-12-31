@@ -31,11 +31,11 @@ def create_mask(labels):
 
 # Function to segment a specific object in the image based on the selected mask
 def display_segmented_object(mask, image):
-    # Convert the colored mask to grayscale
-    gray = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+    # Create a new image from the mask array
+    mask_image = cv2.merge((mask[:,:,0], mask[:,:,1], mask[:,:,2]))
     
-    # Convert the grayscale mask back to a colored image
-    mask = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    # Convert the colored mask to grayscale
+    gray = cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY)
     
     # Threshold the mask to create a binary image
     _, threshold = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)
@@ -45,6 +45,7 @@ def display_segmented_object(mask, image):
     
     # Display the segmented object using Streamlit
     st.image(object)
+
 
 
 
