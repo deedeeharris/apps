@@ -31,8 +31,16 @@ def create_mask(labels):
 
 # Function to segment a specific object in the image based on the selected mask
 def display_segmented_object(mask, image):
-    # Create a new image from the mask array
-    mask_image = cv2.merge((mask[:,:,0], mask[:,:,1], mask[:,:,2]))
+    # Check if the mask is a 2D or 3D array
+    if mask.ndim == 2:
+        # Create a new image from the 2D mask array
+        mask_image = cv2.merge((mask, mask, mask))
+    elif mask.ndim == 3:
+        # Create a new image from the 3D mask array
+        mask_image = cv2.merge((mask[:,:,0], mask[:,:,1], mask[:,:,2]))
+    else:
+        # Raise an error if the mask is not a 2D or 3D array
+        raise ValueError("Invalid mask array")
     
     # Convert the colored mask to grayscale
     gray = cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY)
@@ -45,6 +53,7 @@ def display_segmented_object(mask, image):
     
     # Display the segmented object using Streamlit
     st.image(object)
+
 
 
 
