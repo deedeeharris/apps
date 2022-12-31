@@ -1,6 +1,3 @@
-
-
-
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
@@ -34,17 +31,19 @@ def create_mask(image, labels, centers):
     return mask
 
 def main():
+    st.header("Image Segmentation using K-Means")
+    st.markdown("To use this app, upload an image and use the slider to select the number of clusters. The app will segment the image using k-means clustering and display the original image and the labelled mask.")
+    
     image_path = st.file_uploader("Choose an image", type=["jpg", "png"])
     if not image_path:
-        return
-    image = load_image(image_path)
-    k = st.sidebar.slider("Number of clusters", 2, 10, 5)
-    labels, centers = compute_kmeans(image, k)
-    mask = create_mask(image, labels, centers)
-    st.image(image_path, width=400)
-    plt.imshow(mask, cmap="Accent")
-    st.pyplot()
-
-if __name__ == "__main__":
-    main()
-
+        # Load default image and segment using k-means
+        image_url = "https://gardenerspath.com/wp-content/uploads/2020/09/Common-Tomato-Diseases-Cover.jpg"
+        image = load_image(image_url)
+        k = st.sidebar.slider("Number of clusters", 2, 10, 5)
+        labels, centers = compute_kmeans(image, k)
+        mask = create_mask(image, labels, centers)
+        st.image(image_url, width=400)
+    else:
+        # Load and segment user-uploaded image
+        image = load_image(image_path)
+        k = st.sidebar.slider("Number of clusters", 2, 10,
