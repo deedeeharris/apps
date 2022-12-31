@@ -65,3 +65,4 @@ def main():
         
         display_segmented_object(mask, image)
 
+main()
