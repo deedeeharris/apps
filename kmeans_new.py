@@ -34,6 +34,9 @@ def display_segmented_object(mask, image):
     # Convert the colored mask to grayscale
     gray = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
     
+    # Convert the grayscale mask back to a colored image
+    mask = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    
     # Threshold the mask to create a binary image
     _, threshold = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)
     
@@ -42,6 +45,7 @@ def display_segmented_object(mask, image):
     
     # Display the segmented object using Streamlit
     st.image(object)
+
 
 
 # Main function
