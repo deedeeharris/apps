@@ -21,9 +21,12 @@ def create_mask(labels):
     # Create a mask image with the same dimensions as the input image
     mask = np.zeros_like(labels, dtype=np.uint8)
 
-    # Assign a different color to each cluster
-    for i in range(labels.max() + 1):
-        mask[labels == i] = np.array([i, i, i])
+    # Create a color map with 256 colors
+    color_map = cv2.COLORMAP_JET
+
+    # Assign a different color to each cluster using the color map
+    for i in range(256):
+        mask[labels == i] = color_map[i]
     
     return mask
 
