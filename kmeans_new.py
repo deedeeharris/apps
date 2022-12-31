@@ -28,7 +28,7 @@ def create_mask(labels):
     return mask
 
 # Function to segment a specific object in the image based on the selected mask
-def segment_object(image, mask):
+def display_segmented_object(mask, image):
     # Convert the mask to grayscale
     gray = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
     
@@ -38,7 +38,8 @@ def segment_object(image, mask):
     # Bitwise-and the image with the mask to extract the object
     object = cv2.bitwise_and(image, image, mask=threshold)
     
-    return object
+    # Display the segmented object using Streamlit
+    st.image(object)
 
 # Main function
 def main():
@@ -61,4 +62,6 @@ def main():
         
         # Display the labeled mask
         st.image(mask)
+        
+        display_segmented_object(mask, image)
 
