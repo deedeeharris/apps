@@ -51,8 +51,15 @@ def display_segmented_object(mask, image):
     # Bitwise-and the image with the mask to extract the object
     object = cv2.bitwise_and(image, image, mask=threshold)
     
+    # Display a "Please wait" message
+    st.markdown("Please wait...")
+    
     # Display the segmented object using Streamlit
     st.image(object)
+    
+    # Clear the "Please wait" message
+    st.markdown("")
+
 
 
 
