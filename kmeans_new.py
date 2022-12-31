@@ -68,8 +68,14 @@ def main():
     
     # Download mask image
     if st.button("Download mask"):
-        plt.imsave("mask.jpg", mask, cmap="Accent")
-        st.markdown("<a href='mask.jpg' download>Download mask</a>", unsafe_allow_html=True)
+        with st.echo():
+            # Save mask to buffer
+            buf = io.BytesIO()
+            plt.imsave(buf, mask, cmap="Accent")
+            buf.seek(0)
+            
+            # Create download link
+            st.markdown
 
 if __name__ == "__main__":
     main()
