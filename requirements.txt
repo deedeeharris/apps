@@ -4,3 +4,4 @@ scikit-learn
 opencv-contrib-python-headless
 numpy
 imutils
+matplotlib
