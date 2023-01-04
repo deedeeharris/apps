@@ -1,8 +1,8 @@
 import streamlit as st
-import streamlit.components.v1 as components
+from streamlit.components.html import HTML
+
 
 html_url = "https://raw.githubusercontent.com/deedeeharris/apps/main/plotting/time_series.html"
 
-
-p = open(html_url)
-components.html(p.read())
+iframe = '<iframe src="{}" width="800" height="600"></iframe>'.format(html_url)
+HTML(iframe)
