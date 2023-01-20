@@ -27,8 +27,8 @@ def split_text(text):
     return result
 
 def main():
-    st.title("Text Splitter App")
-    st.write("This app splits text into chunks of 2000 words or less, saves each chunk in a new line in a text file named 'all_parts.txt', adds 'WAIT!' at the beginning and end of each chunk, and adds instructions at the end of the file")
+    st.title("Article Text Splitter App, for ChatGPT")
+    st.write("This app splits text into chunks of 2000 words or less, in order to send the parts to ChatGPT to get an entire summary.")
 
     text_input = st.text_area("Enter the text:")
     if st.button("Split and Save"):
