@@ -30,8 +30,8 @@ def main():
     st.title("Article Text Splitter App, for ChatGPT, by Yedidya Harris")
     st.write("This app splits text into chunks of 2000 words or less, in order to send the parts to ChatGPT to get an entire summary.")
 
-    text_input = st.text_area("Enter the text:")
-    if st.button("Split and Save"):
+    text_input = st.text_area("Paste long text here:")
+    if st.button("Split"):
         result = split_text(text_input)
         with open("all_parts.txt", "w") as f:
             for i, text_part in enumerate(result):
