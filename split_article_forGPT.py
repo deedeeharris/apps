@@ -2,6 +2,8 @@
 # Yedidya Harris, Jan-2023
 
 import streamlit as st
+import pyperclip
+
 
 def split_text(text):
     # Split the text into words
@@ -44,7 +46,14 @@ def main():
         st.markdown("2. Send each part of the article, in one message.")
 
         
-        st.text(open("all_parts.txt").read())
+        with open("all_parts.txt", "r") as f:
+            file_text = f.read()
+            st.text(file_text)
+        
+        if st.button("Copy to Clipboard"):
+            pyperclip.copy(file_text)
+            st.success("Text copied to clipboard!")
+
 
 if __name__ == '__main__':
     main()
