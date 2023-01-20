@@ -1,9 +1,9 @@
 streamlit
-scikit-image
-scikit-learn
-opencv-contrib-python-headless
-numpy
-imutils
-matplotlib
-Pillow
+#scikit-image
+#scikit-learn
+#opencv-contrib-python-headless
+#numpy
+#imutils
+#matplotlib
+#Pillow
 pyperclip
