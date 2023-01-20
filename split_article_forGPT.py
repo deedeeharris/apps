@@ -27,7 +27,7 @@ def split_text(text):
     return result
 
 def main():
-    st.title("Article Text Splitter App, for ChatGPT")
+    st.title("Article Text Splitter App, for ChatGPT, by Yedidya Harris")
     st.write("This app splits text into chunks of 2000 words or less, in order to send the parts to ChatGPT to get an entire summary.")
 
     text_input = st.text_area("Enter the text:")
