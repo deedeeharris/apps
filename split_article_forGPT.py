@@ -1,3 +1,6 @@
+# Split article text for ChatGPT in order to get a summary
+# Yedidya Harris, Jan-2023
+
 import streamlit as st
 
 def split_text(text):
@@ -31,7 +34,7 @@ def main():
         with open("all_parts.txt", "w") as f:
             for i, text_part in enumerate(result):
                 f.write(f"\nPart{i+1}, WAIT!: {text_part} WAIT!\n")
-            f.write(f"\nNow start summarizing. Go!")
+            f.write(f"Now start summarizing. Go!")
 
         st.success("Text has been splitted!")
         
