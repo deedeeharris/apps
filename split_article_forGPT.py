@@ -2,7 +2,7 @@
 # Yedidya Harris, Jan-2023
 
 import streamlit as st
-import pyperclip
+#import pyperclip
 
 
 def split_text(text):
@@ -50,11 +50,6 @@ def main():
             file_text = f.read()
             st.text(file_text)
         
-        if st.button("Copy to Clipboard"):
-            pyperclip.copy(file_text)
-            st.success("Text copied to clipboard!")
-            
-        st.text(file_text)
 
 
 if __name__ == '__main__':
