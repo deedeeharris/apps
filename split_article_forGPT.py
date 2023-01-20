@@ -53,6 +53,8 @@ def main():
         if st.button("Copy to Clipboard"):
             pyperclip.copy(file_text)
             st.success("Text copied to clipboard!")
+            
+            st.text(file_text)
 
 
 if __name__ == '__main__':
