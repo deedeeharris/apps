@@ -36,7 +36,7 @@ def main():
         with open("all_parts.txt", "w") as f:
             for i, text_part in enumerate(result):
                 f.write(f"\nPart{i+1}, WAIT!: {text_part} WAIT!\n")
-            f.write(f"Now start summarizing. Go!")
+            #f.write(f"Now start summarizing. Go!")
 
         st.success("Text has been splitted!")
         
