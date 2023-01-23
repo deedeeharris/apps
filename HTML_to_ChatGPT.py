@@ -13,7 +13,7 @@ def main():
         chunks = [html_code[i:i+chunk_size] for i in range(0, len(html_code), chunk_size)]
         with open("all_parts.txt", "w") as f:
             for i, chunk in enumerate(chunks):
-                f.write(f"\nChunk {i+1}: {chunk}  !!Wait for next chunk.!!\מ")
+                f.write(f"\n\nChunk {i+1}: {chunk}  !!Wait for next chunk.!!\מ")
             #f.write(f"Go!")
 
         st.success("HTML code has been splitted!")
