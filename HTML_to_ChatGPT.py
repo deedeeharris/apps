@@ -8,7 +8,7 @@ def main():
     st.write("This app splits HTML CODE into chunks of 10,000 chars or less, in order to send the parts to ChatGPT.")
     chunk_size = 10000
     
-    text_input = st.text_area("Enter the HTML code:")
+    html_code = st.text_area("Enter the HTML code:")
     if st.button("Split"):
         chunks = [html_code[i:i+chunk_size] for i in range(0, len(html_code), chunk_size)]
         with open("all_parts.txt", "w") as f:
