@@ -15,7 +15,7 @@ def split_text(text):
     # Iterate over the words
     for word in words:
         # If adding the word to the current string would exceed the 2000 word limit
-        if len(current_string.split()) + len(word.split()) > 2000:
+        if len(current_string.split()) + len(word.split()) > 1300:
             # Append the current string to the result list
             result.append(current_string)
             # Reset the current string
