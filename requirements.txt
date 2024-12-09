@@ -1,8 +1,8 @@
 streamlit
-#scikit-image
+scikit-image
 #scikit-learn
-#opencv-contrib-python-headless
-#numpy
+opencv-contrib-python-headless
+numpy
 #imutils
 #matplotlib
 #Pillow
